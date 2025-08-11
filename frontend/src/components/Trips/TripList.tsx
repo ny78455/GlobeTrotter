@@ -12,8 +12,22 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
+// Trip type
+interface Trip {
+  id: string;
+  name: string;
+  description: string;
+  destination: string;
+  startDate: string;
+  endDate: string;
+  image: string;
+  budget: number;
+  cities: number;
+  status: "upcoming" | "planning" | "completed" | string;
+}
+
 // ✅ Default trips for first load
-const defaultTrips = [
+const defaultTrips: Trip[] = [
   {
     id: "1",
     name: "Tokyo Adventure",
@@ -57,9 +71,9 @@ const defaultTrips = [
 
 const TripList: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [trips, setTrips] = useState<any[]>([]);
+  const [trips, setTrips] = useState<Trip[]>([]);
 
-  // ✅ Load trips from localStorage (and save defaults if empty)
+  // Load trips from localStorage or initialize defaults
   useEffect(() => {
     const storedTrips = localStorage.getItem("trips");
     if (storedTrips) {
@@ -70,7 +84,7 @@ const TripList: React.FC = () => {
     }
   }, []);
 
-  // 🗑 Delete Trip
+  // Delete Trip handler
   const handleDelete = (id: string) => {
     if (window.confirm("Are you sure you want to delete this trip?")) {
       const updatedTrips = trips.filter((trip) => trip.id !== id);
@@ -79,6 +93,7 @@ const TripList: React.FC = () => {
     }
   };
 
+  // Map status to color classes
   const getStatusColor = (status: string) => {
     switch (status) {
       case "upcoming":
@@ -111,6 +126,7 @@ const TripList: React.FC = () => {
                   ? "bg-blue-500 text-white"
                   : "text-gray-600 hover:text-gray-800"
               }`}
+              aria-label="Grid view"
             >
               <Grid className="h-4 w-4" />
             </button>
@@ -121,6 +137,7 @@ const TripList: React.FC = () => {
                   ? "bg-blue-500 text-white"
                   : "text-gray-600 hover:text-gray-800"
               }`}
+              aria-label="List view"
             >
               <List className="h-4 w-4" />
             </button>
@@ -147,133 +164,136 @@ const TripList: React.FC = () => {
             : "space-y-4"
         }
       >
-        {trips.map((trip, index) => (
-          <motion.div
-            key={trip.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 * index }}
-            className={`bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all ${
-              viewMode === "list" ? "flex items-center" : ""
-            }`}
-          >
-            <div
-              className={`relative ${viewMode === "list" ? "w-48 h-32" : ""}`}
+        {trips.length > 0 ? (
+          trips.map((trip, index) => (
+            <motion.div
+              key={trip.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * index }}
+              className={`bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-xl transition-all ${
+                viewMode === "list" ? "flex items-center" : ""
+              }`}
             >
-              <img
-                src={trip.image}
-                alt={trip.name}
-                className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
-                  viewMode === "list" ? "w-full h-full" : "w-full h-48"
-                }`}
-              />
-              <div className="absolute top-4 left-4">
-                <span
-                  className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${getStatusColor(
-                    trip.status
-                  )}`}
-                >
-                  {trip.status}
-                </span>
-              </div>
-            </div>
-
-            <div className={`p-6 ${viewMode === "list" ? "flex-1" : ""}`}>
               <div
-                className={
-                  viewMode === "list" ? "flex items-center justify-between" : ""
-                }
+                className={`relative ${viewMode === "list" ? "w-48 h-32" : ""}`}
               >
-                <div className={viewMode === "list" ? "flex-1" : ""}>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
-                    {trip.name}
-                  </h3>
-                  <p className="text-gray-600 mb-3 line-clamp-2">
-                    {trip.description}
-                  </p>
-
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-sm text-gray-600">
-                      <MapPin className="h-4 w-4 mr-2" />
-                      {trip.destination}
-                    </div>
-                    <div className="flex items-center text-sm text-gray-600">
-                      <Calendar className="h-4 w-4 mr-2" />
-                      {new Date(trip.startDate).toLocaleDateString()} -{" "}
-                      {new Date(trip.endDate).toLocaleDateString()}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-                    <span>{trip.cities} cities</span>
-                    <span className="font-semibold">
-                      ${trip.budget.toLocaleString()}
-                    </span>
-                  </div>
-                </div>
-
-                <div
-                  className={`flex items-center space-x-2 ${
-                    viewMode === "list" ? "ml-6" : "justify-between"
+                <img
+                  src={trip.image}
+                  alt={trip.name}
+                  className={`object-cover group-hover:scale-105 transition-transform duration-300 ${
+                    viewMode === "list" ? "w-full h-full" : "w-full h-48"
                   }`}
-                >
-                  <Link to={`/trips/${trip.id}`}>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
-                    >
-                      <Eye className="h-4 w-4" />
-                    </motion.button>
-                  </Link>
-
-                  <Link to={`/trips/${trip.id}/edit`}>
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-200 transition-colors"
-                    >
-                      <Edit3 className="h-4 w-4" />
-                    </motion.button>
-                  </Link>
-
-                  <motion.button
-                    onClick={() => handleDelete(trip.id)}
-                    whileHover={{ scale: 1.1 }}
-                    className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                />
+                <div className="absolute top-4 left-4">
+                  <span
+                    className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${getStatusColor(
+                      trip.status
+                    )}`}
                   >
-                    <Trash2 className="h-4 w-4" />
-                  </motion.button>
+                    {trip.status}
+                  </span>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
 
-      {trips.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-16"
-        >
-          <div className="bg-gray-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-            <MapPin className="h-12 w-12 text-gray-400" />
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-            No trips yet
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Start planning your next adventure!
-          </p>
-          <Link to="/trips/create">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              className="bg-gradient-to-r from-blue-500 to-orange-500 text-white px-8 py-3 rounded-lg font-semibold"
-            >
-              Create Your First Trip
-            </motion.button>
-          </Link>
-        </motion.div>
-      )}
+              <div className={`p-6 ${viewMode === "list" ? "flex-1" : ""}`}>
+                <div
+                  className={
+                    viewMode === "list" ? "flex items-center justify-between" : ""
+                  }
+                >
+                  <div className={viewMode === "list" ? "flex-1" : ""}>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {trip.name}
+                    </h3>
+                    <p className="text-gray-600 mb-3 line-clamp-2">
+                      {trip.description}
+                    </p>
+
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-sm text-gray-600">
+                        <MapPin className="h-4 w-4 mr-2" />
+                        {trip.destination}
+                      </div>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <Calendar className="h-4 w-4 mr-2" />
+                        {new Date(trip.startDate).toLocaleDateString()} -{" "}
+                        {new Date(trip.endDate).toLocaleDateString()}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
+                      <span>{trip.cities} cities</span>
+                      <span className="font-semibold">
+                        ${trip.budget.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`flex items-center space-x-2 ${
+                      viewMode === "list" ? "ml-6" : "justify-between"
+                    }`}
+                  >
+                    <Link to={`/trips/${trip.id}`}>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        className="p-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-200 transition-colors"
+                        aria-label={`View details of ${trip.name}`}
+                      >
+                        <Eye className="h-4 w-4" />
+                      </motion.button>
+                    </Link>
+
+                    <Link to={`/trips/${trip.id}/edit`}>
+                      <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        className="p-2 bg-orange-100 text-orange-600 rounded-lg hover:bg-orange-200 transition-colors"
+                        aria-label={`Edit ${trip.name}`}
+                      >
+                        <Edit3 className="h-4 w-4" />
+                      </motion.button>
+                    </Link>
+
+                    <motion.button
+                      onClick={() => handleDelete(trip.id)}
+                      whileHover={{ scale: 1.1 }}
+                      className="p-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition-colors"
+                      aria-label={`Delete ${trip.name}`}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </motion.button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <div className="bg-gray-100 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
+              <MapPin className="h-12 w-12 text-gray-400" />
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              No trips yet
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Start planning your next adventure!
+            </p>
+            <Link to="/trips/create">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                className="bg-gradient-to-r from-blue-500 to-orange-500 text-white px-8 py-3 rounded-lg font-semibold"
+              >
+                Create Your First Trip
+              </motion.button>
+            </Link>
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 };

@@ -73,7 +73,7 @@ const UserProfile: React.FC = () => {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="h-32 bg-gradient-to-r from-blue-500 to-orange-500" />
         <div className="relative px-8 pb-8">
-          <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 -mt-16">
+          <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6 -mt-20">
             <div className="relative">
               <img
                 src={previewAvatar}

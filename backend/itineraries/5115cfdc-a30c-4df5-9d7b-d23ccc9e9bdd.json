@@ -1,146 +1,102 @@
 [
   {
-    "place_name": "Ranthambore National Park, Rajasthan",
-    "budget": "₹6000-₹8000",
-    "description": "Witness majestic tigers in their natural habitat. Explore the Ranthambore Fort, a historical marvel.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ranthambore_Fort_Rajasthan_India.jpg/1280px-Ranthambore_Fort_Rajasthan_India.jpg",
+    "place_name": "Matheran",
+    "budget": "₹2000-₹2500",
+    "description": "Hill station near Mumbai, known for its scenic beauty and lack of motorized vehicles.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Matheran_Sunset.jpg/1280px-Matheran_Sunset.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Ranthambore, check into hotel, evening jeep safari"
-      },
-      {
-        "day": "Day 2",
-        "plan": "Morning jeep safari, afternoon explore Ranthambore Fort, evening relax"
-      },
-      {
-        "day": "Day 3",
-        "plan": "Morning visit to nearby village, afternoon travel back"
-      }
+      "Day 1: Travel to Matheran, explore Louisa Point and Panorama Point.",
+      "Day 2: Visit Garbett Point and Echo Point, enjoy the sunset."
     ]
   },
   {
-    "place_name": "Jaisalmer, Rajasthan",
-    "budget": "₹5000-₹7000",
-    "description": "Explore the Golden City, its majestic fort, and sand dunes. Experience camel safaris and Rajasthani culture.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Jaisalmer_Fort.jpg/1280px-Jaisalmer_Fort.jpg",
+    "place_name": "Igatpuri",
+    "budget": "₹1500-₹2000",
+    "description": "Hill station in Maharashtra known for its waterfalls and forts.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Igatpuri_Landscape.jpg/1280px-Igatpuri_Landscape.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Jaisalmer, check in, explore the fort"
-      },
-      {
-        "day": "Day 2",
-        "plan": "Camel safari in the Thar desert, enjoy sunset"
-      },
-      {
-        "day": "Day 3",
-        "plan": "Visit Patwon Ki Haveli, Salim Singh Ki Haveli, travel back"
-      }
+      "Day 1: Visit Bhatsa River and Vihigaon Waterfall.",
+      "Day 2: Explore Tringalwadi Fort and enjoy the local cuisine."
     ]
   },
   {
-    "place_name": "Mount Abu, Rajasthan",
-    "budget": "₹4000-₹6000",
-    "description": "Escape the heat in this hill station. Visit Dilwara Jain Temples, Nakki Lake, and enjoy the scenic beauty.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MountAbu_Sunset.jpg/1280px-MountAbu_Sunset.jpg",
+    "place_name": "Bhandardara",
+    "budget": "₹1800-₹2300",
+    "description": "Hill station in Maharashtra known for its lake and surrounding hills.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Bhandardara_Lake.jpg/1280px-Bhandardara_Lake.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Mount Abu, check in, visit Nakki Lake"
-      },
-      {
-        "day": "Day 2",
-        "plan": "Visit Dilwara Temples, explore the local markets"
-      },
-      {
-        "day": "Day 3",
-        "plan": "Enjoy scenic views, travel back"
-      }
+      "Day 1: Visit Arthur Lake and Randha Falls.",
+      "Day 2: Explore Ratangad Fort and enjoy boating in the lake."
     ]
   },
   {
-    "place_name": "Agra Fort",
-    "budget": "₹1000-₹2000",
-    "description": "Explore the magnificent Mughal architecture of Agra Fort, a UNESCO World Heritage Site.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Agra_Fort_2016.jpg/1280px-Agra_Fort_2016.jpg",
+    "place_name": "Sandhan Valley",
+    "budget": "₹1500-₹2000",
+    "description": "Trekking destination near Igatpuri known for its unique canyon.",
+    "image_url": "https://www.travelogyindia.com/images/sandhan-valley-trekking.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Visit Agra Fort, explore its palaces and museums"
-      }
+      "Day 1: Reach Sandhan Valley, begin the trek.",
+      "Day 2: Complete the trek, return."
     ]
   },
   {
-    "place_name": "Fatehpur Sikri",
-    "budget": "₹1500-₹2500",
-    "description": "Explore the deserted Mughal city, a UNESCO World Heritage Site, known for its stunning architecture.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Fatehpur_Sikri_Buland_Darwaza.jpg/1280px-Fatehpur_Sikri_Buland_Darwaza.jpg",
+    "place_name": "Kamshet",
+    "budget": "₹1000-₹1500",
+    "description": "Small town near Pune known for paragliding and its scenic beauty.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Kamshet_view.jpg/1280px-Kamshet_view.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Visit Fatehpur Sikri, explore the Buland Darwaza and Jama Masjid"
-      }
+      "Day 1: Paragliding, explore the local villages.",
+      "Day 2: Visit Kondeshwar Temple and enjoy the sunset."
     ]
   },
   {
-    "place_name": "Mathura",
-    "budget": "₹1000-₹2000",
-    "description": "Visit the birthplace of Lord Krishna, explore ancient temples and experience religious significance.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Dwarkadhish_Temple_%28cropped%29.jpg/1280px-Dwarkadhish_Temple_%28cropped%29.jpg",
+    "place_name": "Lavasa",
+    "budget": "₹1500-₹2000",
+    "description": "Planned hill city near Pune known for its Italian-style architecture.",
+    "image_url": "https://www.holidify.com/images/cmsuploads/compressed/lavassa-dam-shutterstock_1187504955.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Visit Krishna Janmabhoomi, Dwarkadhish Temple"
-      }
+      "Day 1: Explore the city, visit the War Museum.",
+      "Day 2: Enjoy water sports and the scenic views."
     ]
   },
   {
-    "place_name": "Vrindavan",
-    "budget": "₹1000-₹2000",
-    "description": "Explore the holy city associated with Lord Krishna's childhood, visit numerous temples.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Banke_Bihari_Temple%2C_Vrindavan.jpg/1280px-Banke_Bihari_Temple%2C_Vrindavan.jpg",
+    "place_name": "Mahabaleshwar",
+    "budget": "₹2500-₹3000",
+    "description": "Hill station known for its strawberries and scenic views.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Mahabaleshwar_view.jpg/1280px-Mahabaleshwar_view.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Visit Banke Bihari Temple, Prem Mandir"
-      }
+      "Day 1: Visit Mapro Garden and explore the market.",
+      "Day 2: Visit various viewpoints and enjoy the sunset."
     ]
   },
   {
-    "place_name": "Gwalior Fort",
-    "budget": "₹2000-₹4000",
-    "description": "Explore the majestic Gwalior Fort, a historical landmark with stunning views.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Gwalior_Fort_from_the_South.jpg/1280px-Gwalior_Fort_from_the_South.jpg",
+    "place_name": "Panchgani",
+    "budget": "₹2000-₹2500",
+    "description": "Hill station near Mahabaleshwar known for its serene atmosphere.",
+    "image_url": "https://www.holidify.com/images/cmsuploads/compressed/panchgani-table-land-shutterstock_1056856694.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Gwalior, visit Gwalior Fort, explore the palaces and museums"
-      }
+      "Day 1: Visit Table Land and Parsi Point.",
+      "Day 2: Explore Sydney Point and enjoy the local cuisine."
     ]
   },
   {
-    "place_name": "Orchha",
-    "budget": "₹3000-₹5000",
-    "description": "Explore the architectural marvels of Orchha, a historical town with palaces and temples.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Orchha_Palace.jpg/1280px-Orchha_Palace.jpg",
+    "place_name": "Rajmachi",
+    "budget": "₹1200-₹1700",
+    "description": "Trekking destination near Lonavala known for its forts.",
+    "image_url": "https://www.thrillophilia.com/blog/wp-content/uploads/2020/01/Rajmachi-Fort-Trek-near-Lonavala-Featured-Image.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Orchha, explore the palaces and temples on the banks of Betwa river"
-      }
+      "Day 1: Reach base, start the trek to Rajmachi Fort.",
+      "Day 2: Explore the fort, descend and return."
     ]
   },
   {
-    "place_name": "Dhaulpur, Rajasthan",
-    "budget": "₹3000-₹5000",
-    "description": "Visit the historical sites of Dhaulpur, explore the palaces and the scenic beauty of the Chambal River.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Dhaulpur_Palace.jpg/1280px-Dhaulpur_Palace.jpg",
+    "place_name": "Lohagad Fort",
+    "budget": "₹1000-₹1500",
+    "description": "Historical fort near Lonavala offering panoramic views.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Lohagad_Fort.jpg/1280px-Lohagad_Fort.jpg",
     "itinerary": [
-      {
-        "day": "Day 1",
-        "plan": "Travel to Dhaulpur, visit the palace and historical sites"
-      }
+      "Day 1: Travel to Lohagad, begin the trek.",
+      "Day 2: Explore the fort, enjoy the views, return."
     ]
   }
 ]

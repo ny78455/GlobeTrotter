@@ -41,6 +41,17 @@ const CreateTrip: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prev) => ({ ...prev, coverImage: reader.result as string }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -183,19 +194,33 @@ const CreateTrip: React.FC = () => {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Cover Image (Optional)
             </label>
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
-              <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <div>
-                <button
-                  type="button"
-                  className="text-blue-600 hover:text-blue-800 font-medium"
-                >
-                  Upload a cover image
-                </button>
-                <p className="text-sm text-gray-500 mt-2">
-                  PNG, JPG, GIF up to 10MB
-                </p>
-              </div>
+            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors relative">
+              {formData.coverImage ? (
+                <img
+                  src={formData.coverImage}
+                  alt="Cover Preview"
+                  className="mx-auto mb-4 max-h-48 object-contain rounded"
+                />
+              ) : (
+                <>
+                  <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 mb-2">PNG, JPG, GIF up to 10MB</p>
+                </>
+              )}
+
+              <label
+                htmlFor="coverImageInput"
+                className="cursor-pointer text-blue-600 hover:text-blue-800 font-medium"
+              >
+                {formData.coverImage ? 'Change Cover Image' : 'Upload a cover image'}
+              </label>
+              <input
+                id="coverImageInput"
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="hidden"
+              />
             </div>
           </div>
 

@@ -1,0 +1,7 @@
+id,name,country,description,image,costIndex,popularity,highlights
+1,Tokyo,Japan,"A bustling metropolis blending tradition with modernity","https://images.pexels.com/photos/2506923/pexels-photo-2506923.jpeg?auto=compress&cs=tinysrgb&w=400",4,9.2,"Sushi;Temples;Shopping;Technology"
+2,Paris,France,"The city of love with iconic landmarks and rich culture","https://images.pexels.com/photos/1530259/pexels-photo-1530259.jpeg?auto=compress&cs=tinysrgb&w=400",4,9.5,"Art;Fashion;Cuisine;Architecture"
+3,Bangkok,Thailand,"Vibrant street life, ornate shrines, and bustling markets","https://images.pexels.com/photos/1659437/pexels-photo-1659437.jpeg?auto=compress&cs=tinysrgb&w=400",2,8.7,"Street Food;Temples;Markets;Nightlife"
+4,Reykjavik,Iceland,"Gateway to natural wonders and Nordic culture","https://images.pexels.com/photos/1438834/pexels-photo-1438834.jpeg?auto=compress&cs=tinysrgb&w=400",5,8.1,"Northern Lights;Geysers;Blue Lagoon;Culture"
+5,Dubai,UAE,"Luxury shopping, ultramodern architecture, and desert adventures","https://images.pexels.com/photos/1470405/pexels-photo-1470405.jpeg?auto=compress&cs=tinysrgb&w=400",4,8.9,"Shopping;Architecture;Desert;Luxury"
+6,Bali,Indonesia,"Tropical paradise with beaches, temples, and rice terraces","https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=400",2,9.0,"Beaches;Temples;Rice Terraces;Culture"
