@@ -1,0 +1,146 @@
+[
+  {
+    "place_name": "Ranthambore National Park, Rajasthan",
+    "budget": "₹6000-₹8000",
+    "description": "Witness majestic tigers in their natural habitat. Explore the Ranthambore Fort, a historical marvel.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Ranthambore_Fort_Rajasthan_India.jpg/1280px-Ranthambore_Fort_Rajasthan_India.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Ranthambore, check into hotel, evening jeep safari"
+      },
+      {
+        "day": "Day 2",
+        "plan": "Morning jeep safari, afternoon explore Ranthambore Fort, evening relax"
+      },
+      {
+        "day": "Day 3",
+        "plan": "Morning visit to nearby village, afternoon travel back"
+      }
+    ]
+  },
+  {
+    "place_name": "Jaisalmer, Rajasthan",
+    "budget": "₹5000-₹7000",
+    "description": "Explore the Golden City, its majestic fort, and sand dunes. Experience camel safaris and Rajasthani culture.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Jaisalmer_Fort.jpg/1280px-Jaisalmer_Fort.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Jaisalmer, check in, explore the fort"
+      },
+      {
+        "day": "Day 2",
+        "plan": "Camel safari in the Thar desert, enjoy sunset"
+      },
+      {
+        "day": "Day 3",
+        "plan": "Visit Patwon Ki Haveli, Salim Singh Ki Haveli, travel back"
+      }
+    ]
+  },
+  {
+    "place_name": "Mount Abu, Rajasthan",
+    "budget": "₹4000-₹6000",
+    "description": "Escape the heat in this hill station. Visit Dilwara Jain Temples, Nakki Lake, and enjoy the scenic beauty.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/MountAbu_Sunset.jpg/1280px-MountAbu_Sunset.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Mount Abu, check in, visit Nakki Lake"
+      },
+      {
+        "day": "Day 2",
+        "plan": "Visit Dilwara Temples, explore the local markets"
+      },
+      {
+        "day": "Day 3",
+        "plan": "Enjoy scenic views, travel back"
+      }
+    ]
+  },
+  {
+    "place_name": "Agra Fort",
+    "budget": "₹1000-₹2000",
+    "description": "Explore the magnificent Mughal architecture of Agra Fort, a UNESCO World Heritage Site.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Agra_Fort_2016.jpg/1280px-Agra_Fort_2016.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Visit Agra Fort, explore its palaces and museums"
+      }
+    ]
+  },
+  {
+    "place_name": "Fatehpur Sikri",
+    "budget": "₹1500-₹2500",
+    "description": "Explore the deserted Mughal city, a UNESCO World Heritage Site, known for its stunning architecture.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Fatehpur_Sikri_Buland_Darwaza.jpg/1280px-Fatehpur_Sikri_Buland_Darwaza.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Visit Fatehpur Sikri, explore the Buland Darwaza and Jama Masjid"
+      }
+    ]
+  },
+  {
+    "place_name": "Mathura",
+    "budget": "₹1000-₹2000",
+    "description": "Visit the birthplace of Lord Krishna, explore ancient temples and experience religious significance.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Dwarkadhish_Temple_%28cropped%29.jpg/1280px-Dwarkadhish_Temple_%28cropped%29.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Visit Krishna Janmabhoomi, Dwarkadhish Temple"
+      }
+    ]
+  },
+  {
+    "place_name": "Vrindavan",
+    "budget": "₹1000-₹2000",
+    "description": "Explore the holy city associated with Lord Krishna's childhood, visit numerous temples.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Banke_Bihari_Temple%2C_Vrindavan.jpg/1280px-Banke_Bihari_Temple%2C_Vrindavan.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Visit Banke Bihari Temple, Prem Mandir"
+      }
+    ]
+  },
+  {
+    "place_name": "Gwalior Fort",
+    "budget": "₹2000-₹4000",
+    "description": "Explore the majestic Gwalior Fort, a historical landmark with stunning views.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Gwalior_Fort_from_the_South.jpg/1280px-Gwalior_Fort_from_the_South.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Gwalior, visit Gwalior Fort, explore the palaces and museums"
+      }
+    ]
+  },
+  {
+    "place_name": "Orchha",
+    "budget": "₹3000-₹5000",
+    "description": "Explore the architectural marvels of Orchha, a historical town with palaces and temples.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Orchha_Palace.jpg/1280px-Orchha_Palace.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Orchha, explore the palaces and temples on the banks of Betwa river"
+      }
+    ]
+  },
+  {
+    "place_name": "Dhaulpur, Rajasthan",
+    "budget": "₹3000-₹5000",
+    "description": "Visit the historical sites of Dhaulpur, explore the palaces and the scenic beauty of the Chambal River.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Dhaulpur_Palace.jpg/1280px-Dhaulpur_Palace.jpg",
+    "itinerary": [
+      {
+        "day": "Day 1",
+        "plan": "Travel to Dhaulpur, visit the palace and historical sites"
+      }
+    ]
+  }
+]

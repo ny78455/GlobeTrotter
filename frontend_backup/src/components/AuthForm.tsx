@@ -13,34 +13,21 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onAuth }) => {
     mobile: ''
   });
   const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Basic validation
-    if (!formData.name.trim() || !formData.email.trim() || !formData.mobile.trim()) {
-      setErrorMessage('All fields are required.');
-      return;
-    }
-
-    setErrorMessage('');
     setLoading(true);
-
     try {
       const res = await fetch('http://localhost:5000/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
-
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error || 'Registration failed');
-
-      // Pass user back to App
+      if (!res.ok) throw json;
       onAuth(json.user);
     } catch (err: any) {
-      setErrorMessage(err.message || 'Something went wrong');
+      alert(err.error || 'Registration failed');
     } finally {
       setLoading(false);
     }
@@ -65,56 +52,22 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onAuth }) => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {errorMessage && (
-              <div className="bg-red-500/80 text-white p-2 rounded-md text-sm">
-                {errorMessage}
-              </div>
-            )}
-
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 h-5 w-5" />
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none"
-              />
+              <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none" />
             </div>
 
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 h-5 w-5" />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none"
-              />
+              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none" />
             </div>
 
             <div className="relative">
               <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60 h-5 w-5" />
-              <input
-                type="tel"
-                name="mobile"
-                placeholder="Mobile Number"
-                value={formData.mobile}
-                onChange={handleChange}
-                required
-                className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none"
-              />
+              <input type="tel" name="mobile" placeholder="Mobile Number" value={formData.mobile} onChange={handleChange} required className="w-full pl-12 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-white/60 focus:outline-none" />
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-white/20 to-white/10 text-white font-semibold py-3 px-4 rounded-xl border border-white/20 flex items-center justify-center gap-2 hover:from-white/30 hover:to-white/20 transition"
-            >
+            <button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-white/20 to-white/10 text-white font-semibold py-3 px-4 rounded-xl border border-white/20 flex items-center justify-center gap-2">
               {loading ? 'Submitting...' : 'Get Started'}
               {!loading && <ArrowRight className="h-5 w-5" />}
             </button>

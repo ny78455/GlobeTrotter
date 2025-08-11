@@ -2,55 +2,51 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  mobile: string;
+  avatar?: string;
+  language?: string;
 }
 
-export interface TravelPreferences {
-  destinations: string[];
-  cuisines: string[];
-  budget: string;
-  groupSize: number;
-}
-
-export interface TripRecommendation {
+export interface Trip {
   id: string;
-  destination: string;
-  duration: string;
-  budget: string;
-  highlights: string[];
-  image: string;
+  name: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  coverImage?: string;
+  budget: number;
+  cities: City[];
+  isPublic: boolean;
+  userId: string;
 }
 
-export interface Itinerary {
+export interface City {
   id: string;
-  destination: string;
-  days: ItineraryDay[];
-  hotels: Hotel[];
-  transportation: Transportation[];
-}
-
-export interface ItineraryDay {
-  day: number;
+  name: string;
+  country: string;
+  arrivalDate: string;
+  departureDate: string;
   activities: Activity[];
+  budget: number;
+  image?: string;
 }
 
 export interface Activity {
-  time: string;
-  title: string;
-  description: string;
-  category: string;
-}
-
-export interface Hotel {
+  id: string;
   name: string;
-  rating: number;
-  price: string;
-  image: string;
+  description: string;
+  time: string;
+  duration: number;
+  cost: number;
+  category: 'transport' | 'accommodation' | 'food' | 'activities' | 'shopping';
+  image?: string;
 }
 
-export interface Transportation {
-  type: string;
-  from: string;
-  to: string;
-  price: string;
+export interface Destination {
+  id: string;
+  name: string;
+  country: string;
+  description: string;
+  image: string;
+  popularity: number;
+  costIndex: number;
 }

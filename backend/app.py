@@ -1,24 +1,21 @@
-import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from config import Config
-from models import db, User, Preference, Itinerary, UpcomingTrip
-import uuid, json, datetime
+from models import db, User, Preference, Itinerary, Trip
+import datetime
+import os
+import uuid, json
 import google.generativeai as genai
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 def clean_gemini_response(raw_text: str) -> str:
     """
-    Trim and remove common markdown wrappers (```json ... ```),
-    and stop at triple single quotes if present.
+    Cleans Gemini's JSON output by removing markdown wrappers and trailing text.
     """
-    if raw_text is None:
-        return ""
     text = raw_text.strip()
-    # remove leading ```json or ``` and trailing ```
     if text.startswith("```json"):
         text = text[len("```json"):].strip()
-    elif text.startswith("```"):
-        text = text[3:].strip()
 
     triple_single_quote_pos = text.find("'''")
     if triple_single_quote_pos != -1:
@@ -27,6 +24,7 @@ def clean_gemini_response(raw_text: str) -> str:
     if text.endswith("```"):
         text = text[:-3].strip()
     return text
+
 
 def create_app():
     app = Flask(__name__)
@@ -41,10 +39,80 @@ def create_app():
     def index():
         return jsonify({'message': 'TravelPlan API running'})
 
-    # existing register, preferences endpoints...
-    # (keep your register and save_preferences code here but remove hardcoded API key)
-    # I'll show the updated preference endpoint usage briefly below.
+    # ---------- AUTH ROUTES ----------
+    @app.post('/api/auth/register')
+    def register():
+        data = request.get_json() or {}
+        name = data.get('name')
+        email = data.get('email')
+        password = data.get('password')
 
+        if not all([name, email, password]):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        if User.query.filter_by(email=email).first():
+            return jsonify({'error': 'Email already registered'}), 409
+
+        user = User(id=str(uuid.uuid4()), name=name, email=email)
+        user.password_hash = generate_password_hash(password)
+
+        db.session.add(user)
+        db.session.commit()
+
+        return jsonify({'message': 'User registered', 'user': user.to_dict()}), 201
+
+    @app.post('/api/auth/login')
+    def login():
+        data = request.get_json() or {}
+        email = data.get('email')
+        password = data.get('password')
+
+        if not all([email, password]):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        user = User.query.filter_by(email=email).first()
+        if not user or not check_password_hash(user.password_hash, password):
+            return jsonify({'error': 'Invalid credentials'}), 401
+
+        return jsonify({'message': 'Login successful', 'user': user.to_dict()}), 200
+
+    # ---------- TRIP ROUTES ----------
+    @app.post('/api/trips')
+    def create_trip():
+        data = request.get_json() or {}
+        user_id = data.get('user_id')
+        name = data.get('name')
+        description = data.get('description', '')
+        start_date = data.get('startDate')
+        end_date = data.get('endDate')
+        budget = data.get('budget')
+        cover_image = data.get('coverImage', '')
+
+        if not all([user_id, name, start_date, end_date]):
+            return jsonify({'error': 'Missing required fields'}), 400
+
+        trip = Trip(
+            id=str(uuid.uuid4()),
+            user_id=user_id,
+            name=name,
+            description=description,
+            start_date=datetime.datetime.strptime(start_date, "%Y-%m-%d").date(),
+            end_date=datetime.datetime.strptime(end_date, "%Y-%m-%d").date(),
+            budget=budget,
+            cover_image=cover_image
+        )
+
+        db.session.add(trip)
+        db.session.commit()
+
+        return jsonify({'message': 'Trip created', 'trip': trip.to_dict()}), 201
+
+    @app.get('/api/trips/<user_id>')
+    def get_trips(user_id):
+        trips = Trip.query.filter_by(user_id=user_id).order_by(Trip.created_at.desc()).all()
+        return jsonify([t.to_dict() for t in trips])
+
+    # ---------- PREFERENCES & ITINERARY ----------
     @app.post('/api/preferences')
     def save_preferences():
         data = request.get_json() or {}
@@ -69,109 +137,61 @@ def create_app():
         db.session.add(pref)
         db.session.commit()
 
-        # Gemini API Call - prompt should ask for safe JSON output
+        # Gemini API Call
         prompt = f"""
-Return EXACTLY a JSON array (no extra text or explanation). Each item:
-{{"place_name": "...", "budget": number, "description": "...", "image_url": "...", "itinerary": ["day 1 ...","day 2 ..."]}}
 My budget is ₹{budget} and my age is {age}.
 I like {', '.join(place_types)}.
 My location is {location}.
 I like {', '.join(cuisines)}.
-Return 10 places.
+Give me exactly 10 best locations to visit in my budget with itinerary and for images get from google or some other platform.
+Return ONLY valid JSON with no comments or extra text.
+The JSON should be an array with fields: place_name, budget, description, image_url, itinerary (array of daily plan).
 """
 
-        # configure API key from environment variable (do NOT hardcode)
-        api_key = os.environ.get("GEMINI_API_KEY")
-        if not api_key:
-            return jsonify({'error': 'Gemini API key not configured on server'}), 500
-        genai.configure(api_key=api_key)
+        genai.configure(api_key="AIzaSyApDq0xuq_uhGM6RPCat00cI0dg-ep3QcQ")
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(prompt)
+
         cleaned_json_text = clean_gemini_response(response.text)
+        print(cleaned_json_text)
 
         try:
             gemini_json = json.loads(cleaned_json_text)
         except Exception as e:
-            app.logger.exception("Invalid Gemini response")
-            return jsonify({'error': 'Invalid Gemini response', 'details': str(e)}), 500
+            print("JSON decode error:", e)
+            return jsonify({'error': 'Invalid Gemini response'}), 500
 
         itinerary = Itinerary(user_id=user_id, data=gemini_json)
         db.session.add(itinerary)
         db.session.commit()
 
+        os.makedirs("itineraries", exist_ok=True)
+        file_path = os.path.join("itineraries", f"{user_id}.json")
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(gemini_json, f, ensure_ascii=False, indent=2)
+
         return jsonify({'message': 'Preferences saved and itinerary generated'}), 201
+    
+    @app.get('/api/local-itinerary/<user_id>')
+    def get_local_itinerary(user_id):
+        file_path = os.path.join("itineraries", f"{user_id}.json")
+        if not os.path.exists(file_path):
+            return jsonify({'error': 'Itinerary not found'}), 404
+        return send_from_directory("itineraries", f"{user_id}.json")
 
-    # ---------------------------
-    # Gemini popular cities endpoint
-    # ---------------------------
-    @app.get('/api/dashboard/popular_cities')
-    def popular_cities():
-        """
-        Returns a JSON array of popular cities (ask Gemini for top cities and an image URL).
-        Optionally accept query params like ?country=India to narrow results.
-        """
-        country = request.args.get('country', 'India')
-        api_key = os.environ.get("GEMINI_API_KEY")
-        if not api_key:
-            return jsonify({'error': 'Gemini API key not configured on server'}), 500
-
-        prompt = f"""
-Return EXACTLY a JSON array of objects (no extra text). Each object:
-{{"city":"...", "state_or_region":"...", "why_popular":"...", "image_url":"..."}}
-Provide top 8 most popular cities for travelers in {country}. For image_url, provide a good public image url (Unsplash or Wikimedia preferred).
-"""
-        genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
-        response = model.generate_content(prompt)
-        cleaned = clean_gemini_response(response.text)
-        try:
-            data = json.loads(cleaned)
-        except Exception as e:
-            app.logger.exception("Gemini popular_cities JSON parse failed")
-            return jsonify({'error': 'Invalid Gemini response', 'details': str(e), 'raw': cleaned[:500]}), 500
-
-        return jsonify(data)
-
-    # ---------------------------
-    # Upcoming trips endpoints
-    # ---------------------------
-    @app.post('/api/trips')
-    def create_trip():
-        payload = request.get_json() or {}
-        user_id = payload.get('user_id')
-        title = payload.get('title')
-        destination = payload.get('destination')
-        start_date = payload.get('start_date')  # expect YYYY-MM-DD
-        end_date = payload.get('end_date')
-        notes = payload.get('notes', '')
-
-        if not all([user_id, title, destination, start_date]):
-            return jsonify({'error': 'Missing required fields'}), 400
-
-        try:
-            sd = datetime.datetime.strptime(start_date, "%Y-%m-%d").date()
-            ed = datetime.datetime.strptime(end_date, "%Y-%m-%d").date() if end_date else None
-        except Exception:
-            return jsonify({'error': 'Invalid date format. Use YYYY-MM-DD'}), 400
-
-        trip = UpcomingTrip(
-            user_id=user_id,
-            title=title,
-            destination=destination,
-            start_date=sd,
-            end_date=ed,
-            notes=notes
-        )
-        db.session.add(trip)
-        db.session.commit()
-        return jsonify({'message': 'Trip created', 'trip': trip.to_dict()}), 201
-
-    @app.get('/api/trips/<user_id>')
-    def get_trips(user_id):
-        trips = UpcomingTrip.query.filter_by(user_id=user_id).order_by(UpcomingTrip.start_date).all()
-        return jsonify([t.to_dict() for t in trips])
+    @app.get('/api/itineraries/<user_id>')
+    def get_itineraries(user_id):
+        itin = Itinerary.query.filter_by(user_id=user_id).order_by(Itinerary.created_at.desc()).first()
+        if not itin:
+            return jsonify({'error': 'No itineraries found'}), 404
+        return jsonify(itin.data)
 
     return app
+
+
+
+
+
 
 if __name__ == '__main__':
     app = create_app()
