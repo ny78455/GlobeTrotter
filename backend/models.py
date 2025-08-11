@@ -13,6 +13,7 @@ class User(db.Model):
 
     preferences = db.relationship("Preference", backref="user", lazy=True)
     itineraries = db.relationship("Itinerary", backref="user", lazy=True)
+    upcoming_trips = db.relationship("UpcomingTrip", backref="user", lazy=True)
 
     def to_dict(self):
         return {
@@ -40,3 +41,26 @@ class Itinerary(db.Model):
     user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
     data = db.Column(db.JSON, nullable=False)  # store Gemini response JSON
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+class UpcomingTrip(db.Model):
+    __tablename__ = 'upcoming_trips'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    destination = db.Column(db.String(255), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=True)
+    notes = db.Column(db.Text, nullable=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'title': self.title,
+            'destination': self.destination,
+            'start_date': self.start_date.isoformat(),
+            'end_date': self.end_date.isoformat() if self.end_date else None,
+            'notes': self.notes,
+            'created_at': self.created_at.isoformat()
+        }

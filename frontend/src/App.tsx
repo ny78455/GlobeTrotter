@@ -1,35 +1,23 @@
-import React, { useState } from "react";
-import { AuthForm } from "./components/AuthForm";
-import { QuestionsForm } from "./components/Questions";
-import {Dashboard} from "./components/Dashboard";
-import type { User as UserType } from "./types";
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import AuthPage from "./components/AuthPage";
+import Dashboard from "./components/Dashboard";
+import PlanTrip from "./components/PlanTrip";
+import ItineraryList from "./components/ItineraryList";
 
-export default function App() {
-  const [step, setStep] = useState<"auth" | "questions" | "dashboard">("auth");
-  const [user, setUser] = useState<UserType | null>(null);
-  const [preferences, setPreferences] = useState<any>(null);
-
-  // When AuthForm is successful
-  const handleAuth = (userData: UserType) => {
-    setUser(userData);
-    setStep("questions");
-  };
-
-  // When QuestionsForm is submitted
-  const handleQuestionsSubmit = (data: any) => {
-    setPreferences(data);
-    setStep("dashboard");
-  };
+function App() {
+  const [user, setUser] = useState<any>(null);
 
   return (
-    <>
-      {step === "auth" && <AuthForm onAuth={handleAuth} />}
-      {step === "questions" && (
-        <QuestionsForm onSubmit={handleQuestionsSubmit} onBack={() => setStep("auth")} />
-      )}
-      {step === "dashboard" && (
-        <Dashboard user={user} preferences={preferences} />
-      )}
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={!user ? <AuthPage setUser={setUser} /> : <Navigate to="/dashboard" />} />
+        <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/" />} />
+        <Route path="/plan-trip" element={user ? <PlanTrip user={user} /> : <Navigate to="/" />} />
+        <Route path="/itineraries" element={user ? <ItineraryList user={user} /> : <Navigate to="/" />} />
+      </Routes>
+    </Router>
   );
 }
+
+export default App;

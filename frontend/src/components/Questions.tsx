@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Wallet, User, Map, UtensilsCrossed, Globe } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import type { User as UserType } from "../types";
 
 interface FormData {
   budget: number | "";
@@ -10,11 +12,12 @@ interface FormData {
 }
 
 interface QuestionsFormProps {
-  onSubmit: (data: FormData) => void;
-  onBack?: () => void;
+  user: UserType; // Now passed from App.tsx
 }
 
-export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }) => {
+export const QuestionsForm: React.FC<QuestionsFormProps> = ({ user }) => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<FormData>({
     budget: "",
     age: "",
@@ -23,47 +26,18 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }
     cuisines: [],
   });
 
-  // Expanded Place Types
   const placeOptions = [
-    "Mountains",
-    "Beaches",
-    "Rainforest",
-    "Deserts",
-    "Hills",
-    "Lakes",
-    "Riverside",
-    "Historical Sites",
-    "Wildlife Safari",
-    "Adventure Parks",
-    "City Tours",
-    "Island",
-    "Countryside",
-    "Religious Sites",
-    "Snow Regions",
+    "Mountains", "Beaches", "Rainforest", "Deserts", "Hills",
+    "Lakes", "Riverside", "Historical Sites", "Wildlife Safari",
+    "Adventure Parks", "City Tours", "Island", "Countryside",
+    "Religious Sites", "Snow Regions",
   ];
 
-  // Expanded Cuisine Types
   const cuisineOptions = [
-    "North Indian",
-    "South Indian",
-    "East Indian",
-    "West Indian",
-    "Mughlai",
-    "Rajasthani",
-    "Gujarati",
-    "Punjabi",
-    "Kashmiri",
-    "Bengali",
-    "Italian",
-    "Chinese",
-    "Mexican",
-    "Thai",
-    "Japanese",
-    "Korean",
-    "Mediterranean",
-    "French",
-    "American",
-    "Middle Eastern",
+    "North Indian", "South Indian", "East Indian", "West Indian", "Mughlai",
+    "Rajasthani", "Gujarati", "Punjabi", "Kashmiri", "Bengali", "Italian",
+    "Chinese", "Mexican", "Thai", "Japanese", "Korean", "Mediterranean",
+    "French", "American", "Middle Eastern",
   ];
 
   const handleCheckboxChange = (field: keyof FormData, value: string) => {
@@ -82,9 +56,30 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(formData);
+
+    try {
+      const res = await fetch("http://127.0.0.1:5000/api/preferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: user.id, // Get from DB-authenticated user
+          ...formData,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("Error:", err);
+        return;
+      }
+
+      // ✅ Redirect to itinerary page with DB user_id
+      navigate(`/itinerary/${user.id}`);
+    } catch (error) {
+      console.error("Submit error:", error);
+    }
   };
 
   return (
@@ -127,7 +122,7 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }
           />
         </div>
 
-        {/* Place Type */}
+        {/* Place Types */}
         <div className="mb-4">
           <label className="flex items-center gap-2 text-slate-700 dark:text-slate-200 mb-2">
             <Map className="h-5 w-5" /> Type of Place
@@ -149,7 +144,7 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }
           </div>
         </div>
 
-        {/* Residing Location */}
+        {/* Location */}
         <div className="mb-4">
           <label className="flex items-center gap-2 text-slate-700 dark:text-slate-200 mb-1">
             <Globe className="h-5 w-5" /> Residing Location
@@ -187,16 +182,7 @@ export const QuestionsForm: React.FC<QuestionsFormProps> = ({ onSubmit, onBack }
         </div>
 
         {/* Actions */}
-        <div className="flex justify-between">
-          {onBack && (
-            <button
-              type="button"
-              onClick={onBack}
-              className="px-4 py-2 rounded-lg bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-white hover:opacity-80"
-            >
-              Back
-            </button>
-          )}
+        <div className="flex justify-end">
           <button
             type="submit"
             className="px-6 py-2 rounded-lg bg-gradient-to-r from-teal-500 to-blue-600 text-white hover:from-teal-600 hover:to-blue-700 shadow-lg"
