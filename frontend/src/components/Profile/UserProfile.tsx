@@ -40,10 +40,10 @@ const UserProfile: React.FC = () => {
   ];
 
   const travelStats = [
-    { label: 'Countries Visited', value: 12 },
-    { label: 'Cities Explored', value: 48 },
-    { label: 'Total Trips', value: 15 },
-    { label: 'Miles Traveled', value: '87,500' }
+    { label: 'Countries Visited', value: 1 },
+    { label: 'Cities Explored', value: 2 },
+    { label: 'Total Trips', value: 2 },
+    { label: 'Miles Traveled', value: '967' }
   ];
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {

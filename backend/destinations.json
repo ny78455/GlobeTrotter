@@ -1,0 +1,202 @@
+[
+    {
+        "id": 1,
+        "name": "Jaipur",
+        "country": "India",
+        "description": "Known as the Pink City, Jaipur is famous for its royal palaces, forts, and vibrant bazaars.",
+        "image_url": "https://s7ap1.scene7.com/is/image/incredibleindia/hawa-mahal-jaipur-rajasthan-city-1-hero?qlt=82&ts=1742200253577",
+        "popularity": 9.2,
+        "costIndex": 3,
+        "highlights": ["Culture", "History", "Shopping"]
+    },
+    {
+        "id": 2,
+        "name": "Goa",
+        "country": "India",
+        "description": "Goa offers golden beaches, Portuguese heritage, and a lively nightlife scene.",
+        "image_url": "https://assets.serenity.co.uk/58000-58999/58779/720x480.jpg",
+        "popularity": 9.5,
+        "costIndex": 4,
+        "highlights": ["Beaches", "Nightlife", "Food"]
+    },
+    {
+        "id": 3,
+        "name": "Varanasi",
+        "country": "India",
+        "description": "One of the oldest living cities in the world, famous for its ghats and spiritual atmosphere.",
+        "image_url": "https://s7ap1.scene7.com/is/image/incredibleindia/manikarnika-ghat-city-hero?qlt=82&ts=1727959374496",
+        "popularity": 9.6,
+        "costIndex": 2,
+        "highlights": ["Spirituality", "Culture", "History"]
+    },
+    {
+        "id": 4,
+        "name": "Manali",
+        "country": "India",
+        "description": "A hill station in Himachal Pradesh known for its adventure sports and scenic beauty.",
+        "image_url": "https://s7ap1.scene7.com/is/image/incredibleindia/The-Best-Adventure-Experiences-in-Manali1-popular?qlt=82&ts=1726730921047",
+        "popularity": 9.1,
+        "costIndex": 3,
+        "highlights": ["Nature", "Adventure", "Mountains"]
+    },
+    {
+        "id": 5,
+        "name": "Kerala Backwaters",
+        "country": "India",
+        "description": "A network of serene canals and lagoons, best explored by houseboat.",
+        "image_url": "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8a2VyYWxhfGVufDB8fDB8fHww",
+        "popularity": 9.4,
+        "costIndex": 4,
+        "highlights": ["Nature", "Relaxation", "Boating"]
+    },
+    {
+        "id": 6,
+        "name": "Agra",
+        "country": "India",
+        "description": "Home to the Taj Mahal, one of the Seven Wonders of the World.",
+        "image_url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg",
+        "popularity": 9.8,
+        "costIndex": 3,
+        "highlights": ["History", "Architecture", "Culture"]
+    },
+    {
+        "id": 7,
+        "name": "Leh-Ladakh",
+        "country": "India",
+        "description": "Known for its dramatic landscapes, monasteries, and adventure trekking.",
+        "image_url": "https://media.istockphoto.com/id/1218830644/photo/beautiful-lake.jpg?s=612x612&w=0&k=20&c=r5or5KmtrZE5P93cDPG2FzxWQxhZA0qeTInoXJ7qXxA=",
+        "popularity": 9.7,
+        "costIndex": 4,
+        "highlights": ["Adventure", "Mountains", "Nature"]
+    },
+    {
+        "id": 8,
+        "name": "Udaipur",
+        "country": "India",
+        "description": "The City of Lakes, offering stunning palaces and romantic boat rides.",
+        "image_url": "https://www.andbeyond.com/wp-content/uploads/sites/5/udaipur.jpg",
+        "popularity": 9.3,
+        "costIndex": 3,
+        "highlights": ["Romance", "Architecture", "Culture"]
+    },
+    {
+        "id": 9,
+        "name": "Rishikesh",
+        "country": "India",
+        "description": "Yoga capital of the world and a hub for adventure sports like rafting.",
+        "image_url": "https://t3.ftcdn.net/jpg/01/89/52/82/360_F_189528297_h8isVylVyDAWnEc8C3LDSACWfnIN3qHa.jpg",
+        "popularity": 9.0,
+        "costIndex": 2,
+        "highlights": ["Spirituality", "Adventure", "Nature"]
+    },
+    {
+        "id": 10,
+        "name": "Darjeeling",
+        "country": "India",
+        "description": "Known for tea gardens and panoramic Himalayan views.",
+        "image_url": "https://static.toiimg.com/thumb/msid-104684372,width-1070,height-580,resizemode-75/104684372,pt-32,y_pad-40/104684372.jpg",
+        "popularity": 8.9,
+        "costIndex": 3,
+        "highlights": ["Nature", "Tea", "Mountains"]
+    },
+    {
+        "id": 11,
+        "name": "Shimla",
+        "country": "India",
+        "description": "The Queen of Hills, a colonial charm with scenic beauty.",
+        "image_url": "https://static.toiimg.com/thumb/msid-102383896,width-748,height-499,resizemode=4,imgsize-238460/.jpg",
+        "popularity": 9.0,
+        "costIndex": 3,
+        "highlights": ["Nature", "Heritage", "Mountains"]
+    },
+    {
+        "id": 12,
+        "name": "Mysore",
+        "country": "India",
+        "description": "Famous for its royal heritage, palaces, and silk.",
+        "image_url": "https://static.toiimg.com/photo/msid-74605798,width-96,height-65.cms",
+        "popularity": 8.8,
+        "costIndex": 2,
+        "highlights": ["Culture", "Architecture", "History"]
+    },
+    {
+        "id": 13,
+        "name": "Amritsar",
+        "country": "India",
+        "description": "Home to the Golden Temple, a spiritual and cultural center.",
+        "image_url": "https://s7ap1.scene7.com/is/image/incredibleindia/golden-temple-amritsar-punjab-tri-hero?qlt=82&ts=1727166214134",
+        "popularity": 9.5,
+        "costIndex": 2,
+        "highlights": ["Spirituality", "History", "Culture"]
+    },
+    {
+        "id": 14,
+        "name": "Kolkata",
+        "country": "India",
+        "description": "The cultural capital of India, known for literature, art, and colonial architecture.",
+        "image_url": "https://s7ap1.scene7.com/is/image/incredibleindia/howrah-bridge-howrah-west-bengal-city-1-hero?qlt=82&ts=1742154305591",
+        "popularity": 9.1,
+        "costIndex": 3,
+        "highlights": ["Culture", "Food", "History"]
+    },
+    {
+        "id": 15,
+        "name": "Mumbai",
+        "country": "India",
+        "description": "The city of dreams, known for Bollywood, beaches, and nightlife.",
+        "image_url": "https://thumbs.dreamstime.com/b/mumbai-skyline-financial-capital-india-57727695.jpg",
+        "popularity": 9.4,
+        "costIndex": 4,
+        "highlights": ["Nightlife", "Culture", "Shopping"]
+    },
+    {
+        "id": 16,
+        "name": "Chennai",
+        "country": "India",
+        "description": "A coastal city rich in Dravidian heritage and temples.",
+        "image_url": "https://www.agoda.com/wp-content/uploads/2024/03/Chennai-India-scaled-e1710033849588.jpg",
+        "popularity": 8.7,
+        "costIndex": 3,
+        "highlights": ["Beaches", "Culture", "Food"]
+    },
+    {
+        "id": 17,
+        "name": "Hyderabad",
+        "country": "India",
+        "description": "The City of Pearls, famous for biryani, forts, and IT hub.",
+        "image_url": "https://media.istockphoto.com/id/1215274990/photo/high-wide-angle-view-of-charminar-in-the-night.jpg?s=612x612&w=0&k=20&c=byyIjqgbslf-L191n6SJu0s35fvNoVeWsxV5rIPK7Sk=",
+        "popularity": 9.2,
+        "costIndex": 3,
+        "highlights": ["Food", "History", "Culture"]
+    },
+    {
+        "id": 18,
+        "name": "Pondicherry",
+        "country": "India",
+        "description": "A French colonial town with serene beaches and spiritual retreats.",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy8VF4FSFcdFlHzlAzLfAJa4ziCMFAeNfWdQ&s",
+        "popularity": 8.9,
+        "costIndex": 3,
+        "highlights": ["Beaches", "Culture", "Relaxation"]
+    },
+    {
+        "id": 19,
+        "name": "Hampi",
+        "country": "India",
+        "description": "UNESCO heritage site with ancient temple ruins and landscapes.",
+        "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzxPHU_B0gk5cqgv2if4iGYQ2FhD2NNvujWg&s",
+        "popularity": 9.3,
+        "costIndex": 2,
+        "highlights": ["History", "Architecture", "Culture"]
+    },
+    {
+        "id": 20,
+        "name": "Jaisalmer",
+        "country": "India",
+        "description": "Golden city in the Thar Desert with forts and camel rides.",
+        "image_url": "https://cdn.abhibus.com/2024/02/Things-to-Do-in-Jaisalmer.jpg",
+        "popularity": 9.1,
+        "costIndex": 3,
+        "highlights": ["Desert", "History", "Culture"]
+    }
+]

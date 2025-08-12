@@ -198,6 +198,16 @@ The JSON should be an array with fields: place_name, budget, description, image_
         if not os.path.exists(file_path):
             return jsonify({'error': 'Itinerary not found'}), 404
         return send_from_directory("itineraries", f"{user_id}.json")
+    
+    @app.get('/api/recommendations')
+    def get_recommendations():
+        json_path = os.path.join(os.path.dirname(__file__), 'destinations.json')
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+            return jsonify(data)
+        except Exception as e:
+            return jsonify({'error': 'Failed to load recommendations', 'details': str(e)}), 500
 
     @app.get('/api/itineraries/<user_id>')
     def get_itineraries(user_id):
@@ -207,6 +217,8 @@ The JSON should be an array with fields: place_name, budget, description, image_
         return jsonify(itin.data)
 
     return app
+
+
 
 
 if __name__ == '__main__':
