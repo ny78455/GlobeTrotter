@@ -9,8 +9,18 @@ import {
   Eye,
   Grid,
   List,
+  X
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Pie } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend
+} from "chart.js";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Trip type
 interface Trip {
@@ -72,6 +82,8 @@ const defaultTrips: Trip[] = [
 const TripList: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [trips, setTrips] = useState<Trip[]>([]);
+  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [showModal, setShowModal] = useState(false);
 
   // Load trips from localStorage or initialize defaults
   useEffect(() => {
@@ -105,6 +117,43 @@ const TripList: React.FC = () => {
       default:
         return "bg-gray-100 text-gray-800";
     }
+  };
+
+  // Budget Breakdown Data with slight randomness (consistent per trip)
+  const getBudgetData = (budget: number, tripId?: string) => {
+    // Base percentages
+    let base = [0.4, 0.25, 0.15, 0.15, 0.05];
+
+    // Seed random generator using tripId so it's consistent
+    let seed = tripId ? tripId.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0) : Date.now();
+    const seededRandom = () => {
+      const x = Math.sin(seed++) * 10000;
+      return x - Math.floor(x);
+    };
+
+    // Add small variation
+    let varied = base.map((p) => p + (seededRandom() - 0.5) * 0.05);
+
+    // Normalize to 1
+    const sum = varied.reduce((a, b) => a + b, 0);
+    varied = varied.map((p) => p / sum);
+
+    return {
+      labels: ["Flights", "Hotels", "Food", "Activities", "Misc"],
+      datasets: [
+        {
+          data: varied.map((p) => budget * p),
+          backgroundColor: [
+            "#3b82f6",
+            "#f97316",
+            "#22c55e",
+            "#eab308",
+            "#a855f7"
+          ],
+          borderWidth: 1
+        }
+      ]
+    };
   };
 
   return (
@@ -175,8 +224,15 @@ const TripList: React.FC = () => {
                 viewMode === "list" ? "flex items-center" : ""
               }`}
             >
+              {/* Clicking the image/description opens modal */}
               <div
-                className={`relative ${viewMode === "list" ? "w-48 h-32" : ""}`}
+                className={`relative cursor-pointer ${
+                  viewMode === "list" ? "w-48 h-32" : ""
+                }`}
+                onClick={() => {
+                  setSelectedTrip(trip);
+                  setShowModal(true);
+                }}
               >
                 <img
                   src={trip.image}
@@ -202,7 +258,13 @@ const TripList: React.FC = () => {
                     viewMode === "list" ? "flex items-center justify-between" : ""
                   }
                 >
-                  <div className={viewMode === "list" ? "flex-1" : ""}>
+                  <div
+                    className={`${viewMode === "list" ? "flex-1" : ""} cursor-pointer`}
+                    onClick={() => {
+                      setSelectedTrip(trip);
+                      setShowModal(true);
+                    }}
+                  >
                     <h3 className="text-xl font-bold text-gray-800 mb-2">
                       {trip.name}
                     </h3>
@@ -225,11 +287,12 @@ const TripList: React.FC = () => {
                     <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
                       <span>{trip.cities} cities</span>
                       <span className="font-semibold">
-                        ${trip.budget.toLocaleString()}
+                        ₹{trip.budget.toLocaleString("en-IN")}
                       </span>
                     </div>
                   </div>
 
+                  {/* Buttons remain same */}
                   <div
                     className={`flex items-center space-x-2 ${
                       viewMode === "list" ? "ml-6" : "justify-between"
@@ -294,6 +357,24 @@ const TripList: React.FC = () => {
           </motion.div>
         )}
       </div>
+
+      {/* Modal */}
+      {showModal && selectedTrip && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-[500px] relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+            >
+              <X className="h-5 w-5" />
+            </button>
+            <h2 className="text-2xl font-bold mb-4">
+              {selectedTrip.name} - Budget Breakdown
+            </h2>
+            <Pie data={getBudgetData(selectedTrip.budget, selectedTrip.id)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

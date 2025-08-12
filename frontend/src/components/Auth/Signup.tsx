@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, User, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, User, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const Signup: React.FC = () => {
@@ -20,41 +20,30 @@ const Signup: React.FC = () => {
     confirmPassword: ''
   });
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false); // NEW
 
   const { signup } = useAuth();
-  const navigate = useNavigate();
 
-  // Validation functions
-  const validateName = (name: string) => {
-    if (!name.trim()) return 'Name is required';
-    return '';
-  };
-
+  const validateName = (name: string) => (!name.trim() ? 'Name is required' : '');
   const validateEmail = (email: string) => {
-    // Simple regex for email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email.trim()) return 'Email is required';
     if (!emailRegex.test(email)) return 'Invalid email address';
     return '';
   };
-
   const validatePassword = (password: string) => {
     if (!password) return 'Password is required';
     if (password.length < 8) return 'Password must be at least 8 characters';
     return '';
   };
-
   const validateConfirmPassword = (confirmPassword: string, password: string) => {
     if (!confirmPassword) return 'Please confirm your password';
     if (confirmPassword !== password) return 'Passwords do not match';
     return '';
   };
 
-  // Handle input changes and validate on the fly
   const handleChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
-
-    // Validate field on change
     let error = '';
     switch (field) {
       case 'name':
@@ -65,7 +54,6 @@ const Signup: React.FC = () => {
         break;
       case 'password':
         error = validatePassword(value);
-        // Also validate confirmPassword again when password changes
         setErrors((prev) => ({
           ...prev,
           confirmPassword: validateConfirmPassword(formData.confirmPassword, value),
@@ -75,11 +63,9 @@ const Signup: React.FC = () => {
         error = validateConfirmPassword(value, formData.password);
         break;
     }
-
     setErrors((prev) => ({ ...prev, [field]: error }));
   };
 
-  // Check entire form validity whenever formData or errors change
   useEffect(() => {
     const noErrors = Object.values(errors).every((err) => err === '');
     const allFieldsFilled = Object.values(formData).every((val) => val.trim() !== '');
@@ -88,27 +74,18 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    // Final validation before submit
     const nameError = validateName(formData.name);
     const emailError = validateEmail(formData.email);
     const passwordError = validatePassword(formData.password);
     const confirmPasswordError = validateConfirmPassword(formData.confirmPassword, formData.password);
-
-    setErrors({
-      name: nameError,
-      email: emailError,
-      password: passwordError,
-      confirmPassword: confirmPasswordError
-    });
+    setErrors({ name: nameError, email: emailError, password: passwordError, confirmPassword: confirmPasswordError });
 
     if (nameError || emailError || passwordError || confirmPasswordError) return;
 
     setIsLoading(true);
-
     try {
       await signup(formData.name, formData.email, formData.password);
-      navigate('/dashboard');
+      setShowSuccess(true); // Show popup
     } catch (error) {
       console.error('Signup failed:', error);
       alert('Signup failed. Please try again.');
@@ -119,11 +96,32 @@ const Signup: React.FC = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-400 via-orange-500 to-blue-500 relative overflow-hidden">
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
         style={{ backgroundImage: 'url(https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080)' }}
       />
-      
+
+      {/* Success Popup */}
+      {showSuccess && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+        >
+          <div className="bg-white rounded-xl p-8 max-w-sm w-full text-center shadow-xl">
+            <CheckCircle className="text-green-500 w-16 h-16 mx-auto mb-4" />
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">User Registration Successful</h2>
+            <p className="text-gray-600 mb-6">Your account has been created successfully.</p>
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="bg-gradient-to-r from-orange-500 to-blue-500 text-white py-2 px-6 rounded-lg font-medium hover:from-orange-600 hover:to-blue-600"
+            >
+              Close
+            </button>
+          </div>
+        </motion.div>
+      )}
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -145,10 +143,9 @@ const Signup: React.FC = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+            {/* Full Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
               <div className="relative">
                 <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -165,10 +162,9 @@ const Signup: React.FC = () => {
               {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
             </div>
 
+            {/* Email */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -185,10 +181,9 @@ const Signup: React.FC = () => {
               {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
             </div>
 
+            {/* Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -213,10 +208,9 @@ const Signup: React.FC = () => {
               {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
             </div>
 
+            {/* Confirm Password */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm Password
-              </label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
                 <input
@@ -233,6 +227,7 @@ const Signup: React.FC = () => {
               {errors.confirmPassword && <p className="text-red-500 text-xs mt-1">{errors.confirmPassword}</p>}
             </div>
 
+            {/* Submit */}
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

@@ -29,7 +29,6 @@ const ItineraryDetails: React.FC = () => {
       .then((itineraries) => {
         const item = itineraries[Number(index)];
 
-        // Convert string-based itinerary into structured format if needed
         if (Array.isArray(item.itinerary) && typeof item.itinerary[0] === "string") {
           item.itinerary = item.itinerary.map((str: string) => {
             const [day, ...rest] = str.split(":");
@@ -42,6 +41,28 @@ const ItineraryDetails: React.FC = () => {
       .catch((err) => console.error(err));
   }, [userId, index]);
 
+  const handleSaveItinerary = () => {
+    if (!data) return;
+
+    const saved = JSON.parse(localStorage.getItem("savedDestinations") || "[]");
+
+    // Prevent duplicates by checking name
+    if (!saved.some((dest: any) => dest.name === data.place_name)) {
+      const newDestination = {
+        id: Date.now().toString(),
+        name: data.place_name,
+        image: assignedImage || data.image_url,
+        savedDate: new Date().toISOString(),
+      };
+
+      const updated = [...saved, newDestination];
+      localStorage.setItem("savedDestinations", JSON.stringify(updated));
+      alert("Itinerary saved to profile!");
+    } else {
+      alert("This itinerary is already saved.");
+    }
+  };
+
   if (!data) return <div className="p-4 text-gray-500">Loading itinerary...</div>;
 
   return (
@@ -50,10 +71,6 @@ const ItineraryDetails: React.FC = () => {
       <p className="text-lg text-gray-700 mb-2">Budget: {data.budget}</p>
       <p className="mb-4">{data.description}</p>
 
-      {/*
-        Show the assignedImage passed from List page if available,
-        else fallback to data.image_url
-      */}
       {(assignedImage || data.image_url) && (
         <img
           src={assignedImage || data.image_url}
@@ -61,6 +78,13 @@ const ItineraryDetails: React.FC = () => {
           className="w-full h-64 object-cover rounded-lg mb-6"
         />
       )}
+
+      <button
+        onClick={handleSaveItinerary}
+        className="bg-gradient-to-r from-blue-500 to-orange-500 text-white px-6 py-2 rounded-lg font-semibold hover:from-blue-600 hover:to-orange-600 transition-all mb-6"
+      >
+        Save Itinerary
+      </button>
 
       <h2 className="text-2xl font-semibold mb-4">Itinerary</h2>
       <div className="space-y-4">

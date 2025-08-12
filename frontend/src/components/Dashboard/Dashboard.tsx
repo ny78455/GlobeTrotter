@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Plus, MapPin, Calendar, DollarSign, TrendingUp } from "lucide-react";
+import { Plus, MapPin, Calendar, IndianRupeeIcon, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
@@ -135,7 +135,7 @@ const Dashboard: React.FC = () => {
               <p className="text-2xl font-bold text-gray-800">₹{totalBudget.toLocaleString()}</p>
             </div>
             <div className="bg-green-100 p-3 rounded-lg">
-              <DollarSign className="h-6 w-6 text-green-600" />
+              <IndianRupeeIcon className="h-6 w-6 text-green-600" />
             </div>
           </div>
         </motion.div>
@@ -180,7 +180,7 @@ const Dashboard: React.FC = () => {
                     <div className="text-sm text-gray-600">Budget: ₹{trip.budget}</div>
                     <div className="flex items-center text-sm text-green-600">
                       <TrendingUp className="h-4 w-4 mr-1" />
-                      ₹{trip.spent ?? trip.budget} spent
+                      ₹{trip.spent ?? 0} spent
                     </div>
                   </div>
                 </div>

@@ -1,112 +1,126 @@
 [
   {
-    "place_name": "Nainital, Uttarakhand",
-    "budget": 15000,
-    "description": "A hill station in the Kumaon region of Uttarakhand, known for its scenic beauty and lakes.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Nainital_Lake.jpg/1280px-Nainital_Lake.jpg",
+    "place_name": "Puri Beach",
+    "budget": "₹2000",
+    "description": "A serene beach with the iconic Jagannath Temple nearby.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Puri_Beach_Orissa_India.jpg/1280px-Puri_Beach_Orissa_India.jpg",
     "itinerary": [
-      "Day 1: Arrive in Nainital, check into hotel, explore Nainital Lake.",
-      "Day 2: Visit Naina Devi Temple, Tiffin Top, and enjoy boating in the lake.",
-      "Day 3: Explore the surrounding areas like Snow View Point,  and depart from Nainital."
+      {
+        "day": "Day 1",
+        "plan": "Arrive in Puri, check into hotel, explore the beach and enjoy the sunset."
+      },
+      {
+        "day": "Day 2",
+        "plan": "Visit Jagannath Temple, explore Puri market, enjoy beach activities."
+      }
     ]
   },
   {
-    "place_name": "McLeod Ganj, Himachal Pradesh",
-    "budget": 12000,
-    "description": "A hill station known for its Tibetan culture and the Dalai Lama's residence.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/McLeod_Ganj_from_Dharamkot.jpg/1280px-McLeod_Ganj_from_Dharamkot.jpg",
+    "place_name": "Konark Sun Temple",
+    "budget": "₹1500",
+    "description": "A magnificent 13th-century Sun Temple, a UNESCO World Heritage Site.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Konark_Sun_Temple.jpg/1280px-Konark_Sun_Temple.jpg",
     "itinerary": [
-      "Day 1: Arrive in McLeod Ganj, check into hotel, explore the town.",
-      "Day 2: Visit the Dalai Lama Temple, Bhagsunath Temple, and enjoy the views from Dharamshala.",
-      "Day 3: Trek to Triund or Naddi village, and depart from McLeod Ganj."
+      {
+        "day": "Day 1",
+        "plan": "Travel to Konark, explore the Sun Temple, enjoy the architecture and history."
+      }
     ]
   },
   {
-    "place_name": "Rishikesh, Uttarakhand",
-    "budget": 10000,
-    "description": "A city known for its yoga and meditation retreats, and adventure activities.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Rishikesh_from_Lakshman_Jhoola.jpg/1280px-Rishikesh_from_Lakshman_Jhoola.jpg",
+    "place_name": "Chilika Lake",
+    "budget": "₹1000",
+    "description": "Asia's largest brackish water lagoon, ideal for birdwatching and boating.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Chilika_Lake.jpg/1280px-Chilika_Lake.jpg",
     "itinerary": [
-      "Day 1: Arrive in Rishikesh, check into hotel, explore Lakshman Jhula and Ram Jhula.",
-      "Day 2: Participate in yoga and meditation sessions, enjoy river rafting.",
-      "Day 3: Visit Triveni Ghat, attend Ganga Aarti, and depart from Rishikesh."
+      {
+        "day": "Day 1",
+        "plan": "Visit Chilika Lake, go for a boat ride, enjoy birdwatching, explore the local villages."
+      }
     ]
   },
   {
-    "place_name": "Landsdowne, Uttarakhand",
-    "budget": 8000,
-    "description": "A quiet hill station with stunning views and colonial architecture.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Landsdowne_Uttarakhand.jpg/1280px-Landsdowne_Uttarakhand.jpg",
+    "place_name": "Daringbadi",
+    "budget": "₹1000",
+    "description": "Known as the 'Kashmir of Odisha', a hill station offering scenic beauty.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Daringbadi%2C_Odisha.jpg/1280px-Daringbadi%2C_Odisha.jpg",
     "itinerary": [
-      "Day 1: Arrive in Lansdowne, check into hotel, explore the town.",
-      "Day 2: Visit Tip N Top, Bhulla Tal, and enjoy the views from Tarkeshwar Mahadev Temple.",
-      "Day 3: Explore the Garhwal Rifles Regimental War Memorial, and depart from Lansdowne."
+      {
+        "day": "Day 1",
+        "plan": "Travel to Daringbadi, explore the hills, enjoy the cool climate, visit local viewpoints."
+      }
     ]
   },
   {
-    "place_name": "Kanatal, Uttarakhand",
-    "budget": 7000,
-    "description": "A small hill station known for its serene beauty and adventure activities.",
-    "image_url": "https://images.pexels.com/photos/3735473/pexels-photo-3735473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "place_name": "Bhitarkanika National Park",
+    "budget": "₹1500",
+    "description": "A mangrove forest, home to various wildlife, including crocodiles and birds.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bhitarkanika_National_Park.jpg/1280px-Bhitarkanika_National_Park.jpg",
     "itinerary": [
-      "Day 1: Arrive in Kanatal, check into hotel, explore the town.",
-      "Day 2: Visit Surkanda Devi Temple, enjoy trekking and camping.",
-      "Day 3: Explore the surrounding areas, and depart from Kanatal."
+      {
+        "day": "Day 1",
+        "plan": "Travel to Bhitarkanika, take a boat safari, explore the mangrove forest, spot wildlife."
+      }
     ]
   },
   {
-    "place_name": "Orchha, Madhya Pradesh",
-    "budget": 6000,
-    "description": "A historical town known for its palaces and temples.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Orchha_Palace.jpg/1280px-Orchha_Palace.jpg",
+    "place_name": "Chandrabhaga Beach",
+    "budget": "₹500",
+    "description": "A secluded beach near Konark, known for its serene atmosphere.",
+    "image_url": "https://www.holidify.com/images/cmsuploads/featured/chandrabhaga-beach-puri.jpg",
     "itinerary": [
-      "Day 1: Arrive in Orchha, check into hotel, explore the town.",
-      "Day 2: Visit Orchha Fort, Jahangir Mahal, and Raja Mahal.",
-      "Day 3: Explore the temples and cenotaphs, and depart from Orchha."
+      {
+        "day": "Day 1",
+        "plan": "Visit Chandrabhaga beach, relax, enjoy the beach and sea."
+      }
     ]
   },
   {
-    "place_name": "Panchmarhi, Madhya Pradesh",
-    "budget": 9000,
-    "description": "A hill station known for its waterfalls and caves.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Panchmarhi_Satpura_Range.jpg/1280px-Panchmarhi_Satpura_Range.jpg",
+    "place_name": "Astaranga Beach",
+    "budget": "₹500",
+    "description": "A less crowded beach known for its scenic beauty.",
+    "image_url": "https://www.holidify.com/images/cmsuploads/blog/travelogue/Astaranga_Beach_Odisha.jpg",
     "itinerary": [
-      "Day 1: Arrive in Panchmarhi, check into hotel, explore the town.",
-      "Day 2: Visit Pandav Caves, Dhoopgarh, and enjoy the waterfalls.",
-      "Day 3: Explore the surrounding areas, and depart from Panchmarhi."
+      {
+        "day": "Day 1",
+        "plan": "Visit Astaranga Beach, enjoy the peaceful atmosphere, relax on the beach."
+      }
     ]
   },
   {
-    "place_name": "Bhedaghat, Madhya Pradesh",
-    "budget": 5000,
-    "description": "Known for the Marble Rocks and Dhuandhar Falls.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Marble_Rocks_Bhedaghat.jpg/1280px-Marble_Rocks_Bhedaghat.jpg",
+    "place_name": "Gopalpur Beach",
+    "budget": "₹750",
+    "description": "A popular beach town with a relaxed atmosphere.",
+    "image_url": "https://www.holidify.com/images/cmsuploads/blog/travelogue/Gopalpur-on-Sea-Odisha.jpg",
     "itinerary": [
-      "Day 1: Arrive in Bhedaghat, boat ride through Marble Rocks, visit Dhuandhar Falls.",
-      "Day 2: Explore local markets and enjoy the scenic views.",
-      "Day 3: Depart from Bhedaghat."
+      {
+        "day": "Day 1",
+        "plan": "Visit Gopalpur Beach, enjoy water sports, explore the beach, relax."
+      }
     ]
   },
   {
-    "place_name": "Amarkantak, Madhya Pradesh",
-    "budget": 7000,
-    "description": "A pilgrimage site known for its religious significance and natural beauty.",
-    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Amarkantak_temple.jpg/1280px-Amarkantak_temple.jpg",
+    "place_name": "Cuttack",
+    "budget": "₹750",
+    "description": "A historical city with various temples and historical sites.",
+    "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Barabati_Fort_Cuttack.jpg/1280px-Barabati_Fort_Cuttack.jpg",
     "itinerary": [
-      "Day 1: Arrive in Amarkantak, visit Kapildhara Falls and Narmada Kund.",
-      "Day 2: Explore the temples and the surrounding forests.",
-      "Day 3: Depart from Amarkantak."
+      {
+        "day": "Day 1",
+        "plan": "Visit Cuttack, explore the Barabati Fort, explore local markets and enjoy street food."
+      }
     ]
   },
   {
-    "place_name": " Pachmarhi, Madhya Pradesh",
-    "budget": 8000,
-    "description": "Hill station known for its waterfalls and caves.",
-    "image_url": "https://www.holidify.com/images/cmsuploads/compressed/panchmarhi_20190524121632.jpg",
+    "place_name": "Rambha Beach",
+    "budget": "₹500",
+    "description": "A serene beach near Chilika Lake, known for its peaceful atmosphere.",
+    "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/a7/d5/70/rambha-beach-orissa.jpg?w=1200&h=-1&s=1",
     "itinerary": [
-      "Day 1: Arrive in Pachmarhi, check in to hotel, visit Bee Falls.",
-      "Day 2: Explore Pandav Caves and Apsara Vihar.",
-      "Day 3: Visit Dhoopgarh, the highest point in Satpura range and depart."
+      {
+        "day": "Day 1",
+        "plan": "Visit Rambha Beach, enjoy the calm beach and explore the area."
+      }
     ]
   }
 ]

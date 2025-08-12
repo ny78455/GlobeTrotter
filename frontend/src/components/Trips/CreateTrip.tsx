@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Upload, Calendar, MapPin, FileText, DollarSign } from 'lucide-react';
+import { ArrowLeft, Upload, Calendar, MapPin, FileText, DollarSign, IndianRupeeIcon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 // Types
@@ -173,10 +173,10 @@ const CreateTrip: React.FC = () => {
           {/* Budget */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Budget (USD)
+              Budget (Rupee)
             </label>
             <div className="relative">
-              <DollarSign className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+              <IndianRupeeIcon className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
               <input
                 type="number"
                 min="0"

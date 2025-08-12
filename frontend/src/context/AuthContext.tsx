@@ -4,7 +4,7 @@ import { User } from '../types';
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
-  signup: (name: string, email: string, password: string) => Promise<void>;
+  signup: (name: string, email: string, password: string, autoLogin?: boolean) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
 }
@@ -24,7 +24,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
     const savedUser = localStorage.getItem('user');
     if (savedUser) {
       setUser(JSON.parse(savedUser));
@@ -33,33 +32,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string) => {
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const mockUser: User = {
       id: '1',
-      name: 'John Traveler',
-      email: email,
-      avatar: 'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2'
+      name: 'Nitin Yadav',
+      email,
+      avatar: 'https://media.licdn.com/dms/image/v2/D5603AQENzn5yqe2JNA/profile-displayphoto-shrink_200_200/B56ZcvtfJTGoAY-/0/1748852147316?e=2147483647&v=beta&t=8JAVcOgq-7VS0nI9S-3Sb7T6T1UeqCzQWd2J-10AcCk'
     };
-    
+
     setUser(mockUser);
     localStorage.setItem('user', JSON.stringify(mockUser));
   };
 
-  const signup = async (name: string, email: string, password: string) => {
-    // Simulate API call
+  const signup = async (name: string, email: string, password: string, autoLogin: boolean = true) => {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    
+
     const mockUser: User = {
       id: '1',
-      name: name,
-      email: email,
+      name,
+      email,
       avatar: 'https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2'
     };
-    
-    setUser(mockUser);
-    localStorage.setItem('user', JSON.stringify(mockUser));
+
+    if (autoLogin) {
+      setUser(mockUser);
+      localStorage.setItem('user', JSON.stringify(mockUser));
+    }
+    // If autoLogin is false → don't setUser or save to localStorage
   };
 
   const logout = () => {
