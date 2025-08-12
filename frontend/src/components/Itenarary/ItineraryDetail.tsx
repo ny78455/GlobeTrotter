@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 interface DayPlan {
   day: string;
@@ -16,15 +16,20 @@ interface ItineraryData {
 
 const ItineraryDetails: React.FC = () => {
   const { userId, index } = useParams<{ userId: string; index: string }>();
+  const location = useLocation();
+  const assignedImage = location.state?.assignedImage as string | undefined;
+
   const [data, setData] = useState<ItineraryData | null>(null);
 
   useEffect(() => {
+    if (!userId) return;
+
     fetch(`http://127.0.0.1:5000/api/local-itinerary/${userId}`)
       .then((res) => res.json())
       .then((itineraries) => {
         const item = itineraries[Number(index)];
 
-        // 🔹 Convert string-based itinerary into structured format
+        // Convert string-based itinerary into structured format if needed
         if (Array.isArray(item.itinerary) && typeof item.itinerary[0] === "string") {
           item.itinerary = item.itinerary.map((str: string) => {
             const [day, ...rest] = str.split(":");
@@ -44,9 +49,14 @@ const ItineraryDetails: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4">{data.place_name}</h1>
       <p className="text-lg text-gray-700 mb-2">Budget: {data.budget}</p>
       <p className="mb-4">{data.description}</p>
-      {data.image_url && (
+
+      {/*
+        Show the assignedImage passed from List page if available,
+        else fallback to data.image_url
+      */}
+      {(assignedImage || data.image_url) && (
         <img
-          src={data.image_url}
+          src={assignedImage || data.image_url}
           alt={data.place_name}
           className="w-full h-64 object-cover rounded-lg mb-6"
         />

@@ -4,9 +4,11 @@ from config import Config
 from models import db, User, Preference, Itinerary, Trip
 import datetime
 import os
-import uuid, json
+import uuid
+import json
 import google.generativeai as genai
 from werkzeug.security import generate_password_hash, check_password_hash
+import pathlib
 
 
 def clean_gemini_response(raw_text: str) -> str:
@@ -38,6 +40,24 @@ def create_app():
     @app.get('/')
     def index():
         return jsonify({'message': 'TravelPlan API running'})
+
+    # Serve images from frontend/public/images
+    @app.route('/images/<path:filename>')
+    def serve_image(filename):
+        return send_from_directory('frontend/public/images', filename)
+
+    # API to list all images in frontend/public/images
+    @app.get('/api/images')
+    def list_images():
+        images_dir = pathlib.Path('/home/nitin/Downloads/Travel_planner/frontend/public/images')
+        if not images_dir.exists():
+            return jsonify({'error': 'Images folder not found'}), 404
+        image_files = [
+            f.name for f in images_dir.iterdir()
+            if f.is_file() and f.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp','.avif'}
+        ]
+        image_urls = [f'/images/{filename}' for filename in image_files]
+        return jsonify(image_urls)
 
     # ---------- AUTH ROUTES ----------
     @app.post('/api/auth/register')
@@ -171,7 +191,7 @@ The JSON should be an array with fields: place_name, budget, description, image_
             json.dump(gemini_json, f, ensure_ascii=False, indent=2)
 
         return jsonify({'message': 'Preferences saved and itinerary generated'}), 201
-    
+
     @app.get('/api/local-itinerary/<user_id>')
     def get_local_itinerary(user_id):
         file_path = os.path.join("itineraries", f"{user_id}.json")
@@ -187,10 +207,6 @@ The JSON should be an array with fields: place_name, budget, description, image_
         return jsonify(itin.data)
 
     return app
-
-
-
-
 
 
 if __name__ == '__main__':
